@@ -10,28 +10,25 @@ keywords = [
   "wasm",
   "webassembly",
 ]
-version.workspace = true
-edition.workspace = true
-authors.workspace = true
-homepage.workspace = true
-repository.workspace = true
-documentation.workspace = true
-readme.workspace = true
-license.workspace = true
-
-# Don't publish this as part of a Topiary release
-publish = false
+version = "0.0.1"
+edition = "2021"
+authors = ["Tweag"]
+homepage = "https://topiary.tweag.io/playground"
+repository = "https://github.com/topiary/playground"
+documentation = "https://topiary.tweag.io/book"
+readme = "README.md"
+license = "MIT"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-topiary-core.workspace = true
-topiary-config.workspace = true
-topiary-tree-sitter-facade.workspace = true
-wasm-bindgen.workspace = true
-wasm-bindgen-futures.workspace = true
+topiary-core = "0.5.1"
+topiary-config = "0.5.1"
+topiary-tree-sitter-facade = "0.5.1"
+wasm-bindgen = "=0.2.91"
+wasm-bindgen-futures = "=0.4"
 
 [build-dependencies]
-itertools.workspace = true
-topiary-core.workspace = true
+itertools = "0.11"
+topiary-core = "0.5.1"

@@ -1,3 +1,7 @@
+fn main() {}
+
+/* Recreate this in CI
+
 use itertools::Itertools;
 use std::collections::HashMap;
 use std::env;
@@ -90,3 +94,5 @@ export default languages;
     )
     .unwrap();
 }
+
+*/
