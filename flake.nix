@@ -45,7 +45,6 @@
     in
     {
       packages = forAllSystems (system: topiaryNix.${system}.packages);
-      lib = forAllSystems (system: topiaryNix.${system}.lib);
       checks = forAllSystems (system: topiaryNix.${system}.checks);
       devShells = forAllSystems (system: topiaryNix.${system}.devShells);
     };

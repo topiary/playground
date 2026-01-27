@@ -31,10 +31,6 @@ let
 
   craneLib = crane.mkLib pkgs';
 
-  topiaryUtils = callPackageNoOverrides ./utils {
-    inherit callPackageNoOverrides;
-  };
-
   inherit
     (callPackageNoOverrides ./packages {
       inherit
@@ -42,29 +38,18 @@ let
         craneLib
         callPackageNoOverrides
         ;
-      inherit (topiaryUtils) prefetchLanguagesFile;
     })
     topiaryPkgs
     binPkgs
     ;
 
-  # NOTE: The name could clashes with nixpkgs' lib, which could lead to
-  # unexpected behaviours in subsequent `callPackage` statements.
-  topiaryLib = callPackageNoOverrides ./lib {
-    inherit (topiaryPkgs) topiary-cli;
-    inherit callPackageNoOverrides topiaryUtils;
-  };
-
   checks = callPackageNoOverrides ./checks {
-    inherit (pkgs') emptyFile;
     inherit topiaryPkgs;
-    inherit (topiaryLib) gitHook;
   };
 
   devShells = callPackageNoOverrides ./devShells {
     inherit
       checks
-      craneLib
       binPkgs
       topiaryPkgs
       ;
@@ -72,12 +57,6 @@ let
 
 in
 {
-  # REVIEW: I have kept the separation between “Topiary” vs. “Bin” packages,
-  # and I plug it throughout the Nix code, only to flatten it at the very end
-  # because that's what flakes want. Maybe we want a flatter organisation from
-  # the get-go, where everything gets merged in `packages/default.nix` and we
-  # only manipulate the `packages` set?
   packages = topiaryPkgs // binPkgs;
-  lib = topiaryUtils // topiaryLib;
   inherit checks devShells;
 }

@@ -3,48 +3,24 @@
   checks ? { },
   craneLib,
   binPkgs,
-  topiaryPkgs ? { },
-  includeExtraPackages ? true,
 }:
 
-craneLib.devShell (
-  {
-    inherit checks;
-  }
-  // (
-    if includeExtraPackages then
-      {
-        packages =
-          with pkgs;
-          with binPkgs;
-          [
-            cargo-dist
-            cargo-flamegraph
-            rust-analyzer
+craneLib.devShell {
+  inherit checks;
 
-            jq
-            nixdoc
+  packages =
+    with pkgs;
+    with binPkgs;
+    [
+      cargo-flamegraph
+      rust-analyzer
 
-            topiaryPkgs.mdbook
-            mdbook-man
-            topiaryPkgs.mdbook-manmunge
+      emscripten
+      jq
+      tree-sitter
 
-            pkg-config
-            openssl.dev
-
-            # Our own scripts
-            # FIXME: Broken
-            # generate-coverage
-            generate-nix-documentation
-            update-wasm-app
-            update-wasm-grammars
-            verify-documented-usage
-          ]
-          ++ pkgs.lib.optionals (!stdenv.isDarwin) [
-            playground
-          ];
-      }
-    else
-      { }
-  )
-)
+      # WASM-specific scripts
+      update-wasm-app
+      update-wasm-grammars
+    ];
+}
