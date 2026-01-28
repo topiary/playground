@@ -54,6 +54,14 @@ jobs:
 #      - build-playground-wasm
 #      - build-language-assets
 #
+#    # NOTE Need to download Tree Sitter 0.22.6 (the version used in
+#    # Topiary 0.5.1) WASM assets:
+#    # - https://github.com/tree-sitter/tree-sitter/releases/download/v0.22.6/tree-sitter.js
+#    # - https://github.com/tree-sitter/tree-sitter/releases/download/v0.22.6/tree-sitter.wasm
+#    #
+#    # These should be bundled with the grammar assets in
+#    # web-playground/public/scripts
+#
 #
 #  trigger-website-build:
 #    # Once the release is available, trigger the website to build
