@@ -1,0 +1,24 @@
+name: Nix tooling and build cache
+
+inputs:
+  nix_path:
+    description: NIX_PATH environment
+    required: true
+
+  auth_token:
+    description: Cachix authentication token
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install Nix
+      uses: cachix/install-nix-action@v31
+      with:
+        nix_path: "${{ inputs.nix_path }}"
+
+    - name: Set up Nix cache
+      uses: cachix/cachix-action@v16
+      with:
+        name: tweag-topiary
+        authToken: "${{ inputs.auth_token }}"
