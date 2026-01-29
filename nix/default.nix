@@ -14,6 +14,7 @@ let
   overlays = import ./overlays;
 
   pkgs' = pkgs.appendOverlays [
+    overlays.tree-sitter
     overlays.wasm-bindgen-cli
     rust-overlay.overlays.default
   ];
