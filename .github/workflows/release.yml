@@ -72,12 +72,36 @@ jobs:
       - get-versions
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          path: playground
+
       - name: Checkout Topiary
         uses: actions/checkout@v6
         with:
           repository: topiary/topiary
           ref: "v${{ needs.get-versions.outputs.topiary }}"
           path: topiary
+
+      - name: Set up build tooling
+        uses: ./playground/.github/actions/nix-build
+        with:
+          nix_path: nixpkgs=channel:nixpkgs-unstable
+          auth_token: "${{ secrets.CACHIX_TWEAG_TOPIARY_AUTH_TOKEN }}"
+
+      - name: Build supported language grammar WASM assets
+        run: |
+          mkdir wasm
+          cd wasm
+
+          nix run ../playground#build-wasm-grammars -- ../topiary/languages.ncl
+
+      - name: Upload build artefacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: language-wasm
+          path: wasm/*.wasm
 
 
 #  # Bundle the above assets with the htdocs and cut a GitHub release

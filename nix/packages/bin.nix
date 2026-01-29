@@ -21,8 +21,8 @@ let
     text = readFile ../../bin/update-wasm-app.sh;
   };
 
-  update-wasm-grammars = writeShellApplication {
-    name = "update-wasm-grammars";
+  build-wasm-grammars = writeShellApplication {
+    name = "build-wasm-grammars";
 
     runtimeInputs = [
       emscripten
@@ -32,13 +32,13 @@ let
       tree-sitter
     ];
 
-    text = readFile ../../bin/update-wasm-grammars.sh;
+    text = readFile ../../bin/build-wasm-grammars.sh;
   };
 
 in
 {
   inherit
     update-wasm-app
-    update-wasm-grammars
+    build-wasm-grammars
     ;
 }

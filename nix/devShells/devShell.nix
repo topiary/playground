@@ -21,6 +21,6 @@ craneLib.devShell {
 
       # WASM-specific scripts
       update-wasm-app
-      update-wasm-grammars
+      build-wasm-grammars
     ];
 }
