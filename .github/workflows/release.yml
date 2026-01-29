@@ -90,18 +90,19 @@ jobs:
           nix_path: nixpkgs=channel:nixpkgs-unstable
           auth_token: "${{ secrets.CACHIX_TWEAG_TOPIARY_AUTH_TOKEN }}"
 
-      - name: Build supported language grammar WASM assets
+      - name: Build supported language grammar assets
         run: |
-          mkdir wasm
-          cd wasm
+          mkdir build
+          cd build
 
           nix run ../playground#build-wasm-grammars -- ../topiary/languages.ncl
+          nix run ../playground#build-languages-export -- ../topiary
 
       - name: Upload build artefacts
         uses: actions/upload-artifact@v6
         with:
-          name: language-wasm
-          path: wasm/*.wasm
+          name: language-assets
+          path: build/*
 
 
 #  # Bundle the above assets with the htdocs and cut a GitHub release

@@ -28,7 +28,6 @@ let
         ../../Cargo.lock
         ../../Cargo.toml
         ../../src
-        ../../build.rs
         ../.
       ];
     };

@@ -22,5 +22,6 @@ craneLib.devShell {
       # WASM-specific scripts
       update-wasm-app
       build-wasm-grammars
+      build-languages-export
     ];
 }

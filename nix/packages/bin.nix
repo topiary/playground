@@ -4,10 +4,12 @@
   writeShellApplication,
 
   emscripten,
+  findutils,
   git,
+  gnused,
+  jq,
   nickel,
   tree-sitter,
-  jq,
 }:
 
 let
@@ -35,10 +37,22 @@ let
     text = readFile ../../bin/build-wasm-grammars.sh;
   };
 
+  build-languages-export = writeShellApplication {
+    name = "build-languages-export";
+
+    runtimeInputs = [
+      gnused
+      findutils
+    ];
+
+    text = readFile ../../bin/build-languages-export.sh;
+  };
+
 in
 {
   inherit
     update-wasm-app
     build-wasm-grammars
+    build-languages-export
     ;
 }
