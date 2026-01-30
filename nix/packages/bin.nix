@@ -17,12 +17,6 @@ let
     readFile
     ;
 
-  update-wasm-app = writeShellApplication {
-    name = "update-wasm-app";
-
-    text = readFile ../../bin/update-wasm-app.sh;
-  };
-
   build-wasm-grammars = writeShellApplication {
     name = "build-wasm-grammars";
 
@@ -51,7 +45,6 @@ let
 in
 {
   inherit
-    update-wasm-app
     build-wasm-grammars
     build-languages-export
     ;

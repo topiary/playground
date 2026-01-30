@@ -85,11 +85,6 @@ let
         wasm-opt -Oz -o $out/output.wasm $out/topiary_playground_bg.wasm
         echo 'Overwriting topiary_playground_bg.wasm with the optimized file'
         mv $out/output.wasm $out/topiary_playground_bg.wasm
-
-        # TODO: This should be done in CI
-        # echo 'Extracting custom build outputs'
-        # export LANGUAGES_EXPORT="$(ls -t target/wasm32-unknown-unknown/release/build/topiary-playground-*/out/languages_export.ts | head -1)"
-        # cp $LANGUAGES_EXPORT $out/
       '';
 
       passthru = { inherit craneLibWasm; };
