@@ -8,9 +8,6 @@ permissions:
   contents: write
 
 on:
-  # FOR DEBUGGING
-  #pull_request:
-
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
@@ -144,6 +141,26 @@ jobs:
             --repo tree-sitter/tree-sitter \
             --pattern "tree-sitter.js" \
             --pattern "tree-sitter.wasm" \
+
+      # NOTE There are end-to-end tests for the web playground. Because
+      # of the playground's development status, we don't currently
+      # bother running them, to speed up the CI. The original
+      # implementation did this, so it shouldn't be too difficult to
+      # reinstate...
+      #
+      # ```yaml
+      # - name: Test playground
+      #   run: |
+      #     npm install --prefix web-playground
+      #     npm run dev --prefix web-playground &
+      #
+      #     # Loop until there's a response
+      #     while [[ "$(curl --silent --output /dev/null --write-out "%{http_code}" http://localhost:5173/playground)" != "200" ]]; do
+      #       sleep 2
+      #     done
+      #
+      #     npm run e2e --prefix web-playground
+      # ```
 
       - name: Build Playground static assets
         run: |
