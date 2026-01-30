@@ -48,7 +48,6 @@ jobs:
 
   # Build supported languages grammar WASM, query and example assets
   build-language-assets:
-    # TODO
 
     runs-on: ubuntu-latest
 

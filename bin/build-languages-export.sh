@@ -75,11 +75,11 @@ export-language() {
   stderr "${ORANGE}" "${language}: Exporting query and example"
 
   cat <<-TYPESCRIPT
-  "${language}": {
-    "query": \`$(to-js-string < "${query}")\`,
-    "input": \`$(to-js-string < "${example}")\`,
-  },
-TYPESCRIPT
+	  "${language}": {
+	    "query": \`$(to-js-string < "${query}")\`,
+	    "input": \`$(to-js-string < "${example}")\`,
+	  },
+	TYPESCRIPT
 }
 
 main() {
