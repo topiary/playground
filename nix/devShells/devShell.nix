@@ -19,8 +19,8 @@ craneLib.devShell {
       jq
       tree-sitter
 
-      # WASM-specific scripts
-      update-wasm-app
-      update-wasm-grammars
+      # Playground-specific scripts
+      build-wasm-grammars
+      build-languages-export
     ];
 }
