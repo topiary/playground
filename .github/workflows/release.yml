@@ -184,12 +184,10 @@ jobs:
             --generate-notes \
             playground-htdocs.tar.gz
 
-      # TODO: Uncomment this when topiary/website and the PAT exist
-      # - name: Trigger website build
-      #   env:
-      #     # TODO Create a PAT with repo scope
-      #     GH_TOKEN: ${{ secrets.DISPATCH_PAT }}
-      #   run: |
-      #     gh api \
-      #       repos/topiary/website/dispatches \
-      #       -f event_type='dependency-update' \
+      - name: Trigger website build
+        env:
+          GH_TOKEN: ${{ secrets.WWW_DISPATCH_PAT }}
+        run: |
+          gh api \
+            repos/topiary/www/dispatches \
+            -f event_type='dependency-update' \
